@@ -13,6 +13,15 @@ angular.module('ssApp')
   $scope.apiData = init.apiData;
   $scope.currentAuth = init.currentAuth;
 
+  $scope.updateTabs = function() {
+    console.log('updates');
+  };
+
+  $scope.tabs = [
+    { title:'Basic', select: $scope.updateTabs },
+    { title:'Advanced', select: $scope.updateTabs }
+  ];
+
   $scope.showTable = false;
   $scope.displayed = [];
   $scope.data_pie = [];

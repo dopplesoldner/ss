@@ -5,9 +5,9 @@
       <a class="navbar-brand" href="#">SS</a>
     </div>
     <div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-      </ul>
+      <!--<ul class="nav navbar-nav">-->
+        <!--<li class="active"><a href="#">Home</a></li>-->
+      <!--</ul>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
@@ -15,50 +15,59 @@
   </div>
   </nav>
 </div>
-<div class="panel panel-success">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Overview</div>
-  <div class="panel-body">
-    <div id="pie_chart" class="row col-md-6 graph">
-      <nvd3 options='options_pie' data='data_pie'></nvd3>
-    </div>
-    <div id="bar_chart" class="row col-md-6 graph">
-      <nvd3 options='options_bar' data='data_bar'></nvd3>
-    </div>
-  </div>
-</div>
 
-<div class="panel panel-success" ng-show="showTable">
-  <!-- Default panel contents -->
-  <div class="panel-heading">{{activeCategory | capitalize}}</div>
-  <div class="panel-body">
-    <!--table-->
-    <div id="table" class="row col-md-12">
-      <table st-table="displayed" st-safe-src="rowCollection" class="table table-striped">
-        <thead>
-          <tr>
-            <th st-sort="Date">Date</th>
-            <th st-sort="Text">Text</th>
-            <th st-sort="Sentiment">Sentiment</th>
-            <th st-sort="Url">Source</th>
-          </tr>
-          <tbody>
-            <tr ng-repeat="row in displayed">
-              <td>{{row.Date}}</td>
-              <td>{{row.Text}}</td>
-              <td>{{row.Sentiment}}</td>
-              <td><a ng-href="{{row.Url}}" target="_blank">Url</a></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="5" class="text-center">
-                <div st-pagination="" st-items-by-page="5"> </div>
-              </td>
-            </tr>
-          </tfoot>
-      </table>
+<div id="mode" class="display-mode">
+  <uib-tabset>
+    <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" select="updateTabs()">
+      <!--{{tab.content}}-->
+    </uib-tab>
+    <div class="panel panel-success">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Overview</div>
+      <div class="panel-body">
+        <div id="pie_chart" class="row col-md-6 graph">
+          <nvd3 options='options_pie' data='data_pie'></nvd3>
+        </div>
+        <div id="bar_chart" class="row col-md-6 graph">
+          <nvd3 options='options_bar' data='data_bar'></nvd3>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="panel panel-success" ng-show="showTable">
+      <!-- Default panel contents -->
+      <div class="panel-heading">{{activeCategory | capitalize}}</div>
+      <div class="panel-body">
+        <!--table-->
+        <div id="table" class="row col-md-12">
+          <table st-table="displayed" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+              <tr>
+                <th st-sort="Date">Date</th>
+                <th st-sort="Text">Text</th>
+                <th st-sort="Sentiment">Sentiment</th>
+                <th st-sort="Url">Source</th>
+              </tr>
+              <tbody>
+                <tr ng-repeat="row in displayed">
+                  <td>{{row.Date}}</td>
+                  <td>{{row.Text}}</td>
+                  <td>{{row.Sentiment}}</td>
+                  <td><a ng-href="{{row.Url}}" target="_blank">Url</a></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="5"> </div>
+                  </td>
+                </tr>
+              </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </uib-tabset>
 </div>
 

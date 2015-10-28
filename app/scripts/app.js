@@ -11,6 +11,7 @@
 angular
 .module('ssApp', [
   'ngRoute',
+  'ui.bootstrap',
   'nvd3',
   'smart-table',
   'firebase',
