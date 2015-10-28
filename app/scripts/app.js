@@ -34,7 +34,33 @@ angular
   .when('/', {
     templateUrl: 'views/main.html',
     controller: 'MainCtrl',
-    controllerAs: 'main'
+    controllerAs: 'main',
+    resolve: {
+      init: function($location, $q, authService, apiService, chartConfigFactory) {
+        var defer = $q.defer();
+        var init = {};
+
+        authService.firebaseAuth.$requireAuth().then(function(currentAuth) {
+          init.currentAuth = currentAuth;
+          return apiService.apiData();
+        }).then(function(results){
+          init.apiData = results;
+          defer.resolve(init);
+        }, function(error){
+          console.log(error);
+          if (error === "AUTH_REQUIRED") {
+            $location.path("/login");
+          }
+
+          defer.reject();
+        });
+
+        return defer.promise;
+      },
+      chartConfig: function(chartConfigFactory) {
+        return chartConfigFactory.chartConfig;
+      }
+    },
   })
   .when('/about', {
     templateUrl: 'views/about.html',
