@@ -8,10 +8,34 @@
  * Controller of the ssApp
  */
 angular.module('ssApp')
-  .controller('LoginCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+.controller('LoginCtrl', function ($scope, $location, authService, ngDialog) {
+
+  $scope.user = {
+    email: '',
+    password: ''
+  };
+
+  $scope.authService = authService.firebaseauthService;
+
+  $scope.submitForm = function() {
+    $scope.pb.start();
+
+    $scope.authService.$authWithPassword({
+      email: $scope.user.email,
+      password: $scope.user.password
+    }).then(function(authData) {
+      console.log("Logged in as:", authData.uid);
+      $scope.pb.complete();
+      $location.path('/');
+    }).catch(function(error) {
+      console.error("authServiceentication failed:", error);
+      $scope.pb.complete();
+      ngDialog.open({
+        template: '<h3>Login Failed!</h3> \
+                   <p>Please check your credentials and try again</p>',
+        plain: true
+      });
+
+    });
+  };
+});
