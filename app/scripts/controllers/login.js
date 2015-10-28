@@ -15,7 +15,7 @@ angular.module('ssApp')
     password: ''
   };
 
-  $scope.authService = authService.firebaseauthService;
+  $scope.authService = authService.firebaseAuth;
 
   $scope.submitForm = function() {
     $scope.pb.start();
@@ -28,7 +28,7 @@ angular.module('ssApp')
       $scope.pb.complete();
       $location.path('/');
     }).catch(function(error) {
-      console.error("authServiceentication failed:", error);
+      console.error("authentication failed:", error);
       $scope.pb.complete();
       ngDialog.open({
         template: '<h3>Login Failed!</h3> \
