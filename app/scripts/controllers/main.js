@@ -29,20 +29,9 @@ angular.module('ssApp')
   $scope.data_pie_advanced = [];
   $scope.data_bar_advanced = [{values: []}];
 
-  $scope.entity = '';
-
   $scope.reviewSources = [];
   for (var key in $scope.apiData.reviewCount) {
     $scope.reviewSources.push({source: key, count: $scope.apiData.reviewCount[key]});
-  }
-
-  $scope.updateEntity = function() {
-    console.log($scope.radio.model);
-  };
-
-  $scope.entities = [];
-  for(var key in $scope.apiData.entity) {
-    $scope.entities.push(key);
   }
 
   $scope.logout = function() {
@@ -98,18 +87,18 @@ angular.module('ssApp')
       });
     }
 
-    $scope.api.refresh();
     $scope.$apply();
   };
 
+  $scope.chartOptions = {
+    optionsBar: angular.copy(chartConfig.barChart),
+    optionsBarAdvanced: angular.copy(chartConfig.barChart),
+    optionsPie: angular.copy(chartConfig.pieChart),
+    optionsPieAdvanced: angular.copy(chartConfig.pieChart)
+  };
 
-  $scope.options_bar = { chart: chartConfig.barChart };
-  $scope.options_bar_advanced = { chart: chartConfig.barChart };
-  $scope.options_pie = { chart: chartConfig.pieChart };
-  $scope.options_pie_advanced = { chart: chartConfig.pieChart };
   // add event handler
-
-  $scope.options_pie.chart.pie =  {   
+  $scope.chartOptions.optionsPie.chart.pie =  {   
     dispatch: {   
       elementClick: function(t){
         if($scope.btn.mode === 'Basic')

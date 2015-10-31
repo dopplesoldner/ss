@@ -61,7 +61,7 @@
         <!-- <div collapse="panelChart3" class="panel-wrapper collapse in graph"> -->
 
         <div class="panel-body">
-          <nvd3 options="options_bar" data="data_bar"></nvd3>
+          <nvd3 options="chartOptions.optionsBar" data="data_bar"></nvd3>
         </div>
 
         </div>
@@ -77,7 +77,7 @@
               <div class="panel-title">Review Breakdown</div>
             </div>
             <div class="panel-body">
-              <nvd3 options="options_pie" data="data_pie"></nvd3>
+              <nvd3 options="chartOptions.optionsPie" data="data_pie"></nvd3>
             </div>
           </div>
         </div>
@@ -112,11 +112,11 @@
                   </tfoot>
               </table>
               <div class="col-md-6">
-                <nvd3 options="options_pie" data="data_pie_advanced" api="api"></nvd3>
+                <nvd3 options="chartOptions.optionsPieAdvanced" data="data_pie_advanced"></nvd3>
               </div>
-              <div class="col-md-6">
-                <nvd3 options="options_bar" data="data_bar_advanced"></nvd3>
-              </div>
+              <!-- <div class="col-md-6">
+                <nvd3 options="chartOptions.optionsBarAdvanced" data="data_bar_advanced"></nvd3>
+              </div> -->
             </div>
           </div>
 

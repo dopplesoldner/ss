@@ -30,6 +30,7 @@ module.exports = function(config) {
       'bower_components/d3/d3.js',
       'bower_components/nvd3/build/nv.d3.js',
       'bower_components/angular-nvd3/dist/angular-nvd3.js',
+      'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
       'bower_components/angular-smart-table/dist/smart-table.js',
       'bower_components/firebase/firebase.js',
       'bower_components/angularfire/dist/angularfire.js',
