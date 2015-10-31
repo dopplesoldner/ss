@@ -56,7 +56,9 @@
       <!-- START bar chart-->
       <div id="panelChart3" class="panel">
         <div class="panel-heading">
-          <div class="panel-title">Sentiment Score per category</div>
+          <div class="panel-title">
+            <div class="col-md-12"><em class="icon-bar-chart"></em>  Sentiment Score per category</div>
+          </div>
         </div>
         <!-- <div collapse="panelChart3" class="panel-wrapper collapse in graph"> -->
 
@@ -74,7 +76,9 @@
           <!-- START bar chart-->
           <div class="panel">
             <div class="panel-heading">
-              <div class="panel-title">Review Breakdown</div>
+              <div class="panel-title">
+                <div class="col-md-12"><em class="icon-pie-chart"></em>  Review Breakdown</div>
+              </div>
             </div>
             <div class="panel-body">
               <nvd3 options="chartOptions.optionsPie" data="data_pie"></nvd3>
@@ -84,16 +88,18 @@
         <div class="col-md-8">
           <div class="panel">
             <div class="panel-heading">
-              <div class="panel-title">{{activeCategory | capitalize}}</div>
+              <div class="panel-title">
+                <div class="col-md-12"><em class="icon-eye"></em>  {{activeCategory | capitalize}}</div>
+              </div>
             </div>
             <div class="panel-body">
               <table st-table="displayed" st-safe-src="rowCollection" class="table table-striped">
                 <thead>
                   <tr>
-                    <th st-sort="Date">Date</th>
-                    <th st-sort="Text">Text</th>
-                    <th st-sort="Sentiment">Sentiment</th>
-                    <th st-sort="Url">Source</th>
+                    <th class="col-md-2" st-sort="Date">Date <i class="fa fa-fw fa-sort"></i></th>
+                    <th class="col-md-6">Text</th>
+                    <th class="col-md-2" st-sort="Sentiment">Sentiment <i class="fa fa-fw fa-sort"></i></th>
+                    <th class="col-md-2">Source</th>
                   </tr>
                   <tbody>
                     <tr ng-repeat="row in displayed">

@@ -10,10 +10,10 @@
 angular.module('ssApp')
 .controller('MainCtrl', function ($scope, $location, $timeout, chartConfig, init, authService, capitalizeFilter) {
 
-  // $scope.apiData = init.apiData;
+  $scope.apiData = init.apiData;
 
   // temp for JSON file
-  $scope.apiData = init.apiData.data['jones family project'];
+  // $scope.apiData = init.apiData.data['jones family project'];
   $scope.currentAuth = init.currentAuth;
 
   $scope.btn = {

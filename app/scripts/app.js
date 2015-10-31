@@ -42,8 +42,10 @@ angular
 
         authService.firebaseAuth.$requireAuth().then(function(currentAuth) {
           init.currentAuth = currentAuth;
-          // return apiService.apiData();
-          return apiService.getData();
+          return apiService.apiData();
+
+          //for local debugging
+          // return apiService.getData();
         }).then(function(results){
           init.apiData = results;
           defer.resolve(init);
