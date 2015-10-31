@@ -15,8 +15,7 @@ angular
   'nvd3',
   'smart-table',
   'firebase',
-  'ngProgress',
-  'ngDialog'
+  'ngProgress'
 ])
 .run(function($rootScope, $location, ngProgressFactory) {
   $rootScope.pb = ngProgressFactory.createInstance();
