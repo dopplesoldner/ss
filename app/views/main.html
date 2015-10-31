@@ -1,34 +1,50 @@
 <div class="header">
   <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">SS</a>
-    </div>
-    <div>
-      <!--<ul class="nav navbar-nav">-->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">SS</a>
+      </div>
+      <div>
+        <!--<ul class="nav navbar-nav">-->
         <!--<li class="active"><a href="#">Home</a></li>-->
-      <!--</ul>-->
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>
+        <!--</ul>-->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
   </nav>
 </div>
 
-<div id="mode" class="display-mode">
-  <uib-tabset>
-    <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" select="updateTabs()">
-      <!--{{tab.content}}-->
-    </uib-tab>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="btn-group">
+        <label class="btn btn-success" ng-model="radioModel" ng-click="updateMode()" uib-btn-radio="'Basic'" uncheckable>Basic</label>
+        <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Advanced'" uncheckable>Advanced</label>
+      </div>
+        
+    </div>
+    <div id="overview" class="overview col-md-3 pull-right">
+      <h4>Jones Family Project</h4>
+    </div>
+  </div>
+
+  <div class="row categories" ng-show="radioModel == 'Advanced'">
+    <div class="btn-group input-group btn-group-justified">
+      <label ng-repeat="e in entities" class="btn btn-primary" ng-model="radio.model" uib-btn-radio="e" ng-click="updateEntity()">{{e}}</label>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="panel panel-success">
       <!-- Default panel contents -->
       <div class="panel-heading">Overview</div>
       <div class="panel-body">
-        <div id="pie_chart" class="row col-md-6 graph">
+        <div id="pie_chart" class="col-md-6 graph">
           <nvd3 options='options_pie' data='data_pie'></nvd3>
         </div>
-        <div id="bar_chart" class="row col-md-6 graph">
+        <div id="bar_chart" class="col-md-6 graph">
           <nvd3 options='options_bar' data='data_bar'></nvd3>
         </div>
       </div>
@@ -39,7 +55,7 @@
       <div class="panel-heading">{{activeCategory | capitalize}}</div>
       <div class="panel-body">
         <!--table-->
-        <div id="table" class="row col-md-12">
+        <div id="table" class="col-md-12">
           <table st-table="displayed" st-safe-src="rowCollection" class="table table-striped">
             <thead>
               <tr>
@@ -68,6 +84,6 @@
       </div>
     </div>
 
-  </uib-tabset>
-</div>
+  </div>
 
+</div>

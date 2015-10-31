@@ -10,58 +10,54 @@
 angular.module('ssApp')
 .controller('MainCtrl', function ($scope, $location, chartConfig, init, authService) {
 
-  $scope.apiData = init.apiData;
+  // $scope.apiData = init.apiData;
+
+  // temp for JSON file
+  $scope.apiData = init.apiData.data['jones family project'];
   $scope.currentAuth = init.currentAuth;
 
-  $scope.updateTabs = function() {
-    console.log('updates');
-  };
-
-  $scope.tabs = [
-    { title:'Basic', select: $scope.updateTabs },
-    { title:'Advanced', select: $scope.updateTabs }
-  ];
-
+  $scope.radioModel = 'Basic';
   $scope.showTable = false;
   $scope.displayed = [];
   $scope.data_pie = [];
   $scope.data_bar = [{values: []}];
+  $scope.entity = '';
+  $scope.radio = {model :  'Bar'};
 
-  $scope.apiData.average.forEach(function(f){
-    if(f.Count > 0) {
-      $scope.data_pie.push({
-        "label": f.Name,
-        "value": f.Count
-      });
-    }
-
-    if(f.Sentiment > 0) {
-      $scope.data_bar[0].values.push({
-        "label": f.Name,
-        "value": f.Sentiment
-      });
-    }
-
-  });
-
-  $scope.options_bar = { chart: chartConfig.barChart };
-  $scope.options_pie = { chart: chartConfig.pieChart };
-  // add event handler
-
-  $scope.options_pie.chart.pie =  {   
-    dispatch: {   
-      elementClick: function(t){
-        updateTable(t.data.label);
-      }
-    }
+  $scope.updateMode = function() {
+    console.log('Clicked');
   };
 
-  $scope.options_bar.chart.multiBar =  {   
-    dispatch: {   
-      elementClick: function(t){
-        updateTable(t.data.label);
+  $scope.updateEntity = function() {
+    console.log($scope.radio.model);
+  };
+
+  $scope.entities = [];
+  for(var key in $scope.apiData.entity) {
+    $scope.entities.push(key);
+  }
+
+  $scope.logout = function() {
+    authService.firebaseAuth.$unauth();
+    $location.path('/login');
+  };
+
+  var updateCharts = function() {
+    $scope.apiData.average.forEach(function(f){
+      if(f.Count > 0) {
+        $scope.data_pie.push({
+          "label": f.Name,
+          "value": f.Count
+        });
       }
-    }
+
+      if(f.Sentiment > 0) {
+        $scope.data_bar[0].values.push({
+          "label": f.Name,
+          "value": f.Sentiment
+        });
+      }
+    });
   };
 
   //table
@@ -85,8 +81,20 @@ angular.module('ssApp')
     $scope.$apply();
   };
 
-  $scope.logout = function() {
-    authService.firebaseAuth.$unauth();
-    $location.path('/login');
+
+  $scope.options_bar = { chart: chartConfig.barChart };
+  $scope.options_pie = { chart: chartConfig.pieChart };
+  // add event handler
+
+  $scope.options_pie.chart.pie =  {   
+    dispatch: {   
+      elementClick: function(t){
+        if($scope.radioModel === 'Basic')
+          updateTable(t.data.label);
+      }
+    }
   };
+
+  updateCharts();
+
 });

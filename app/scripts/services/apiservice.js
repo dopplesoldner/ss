@@ -11,6 +11,10 @@
 angular.module('ssApp')
 .factory('apiService', function ($http, $q, authService, $rootScope) {
 
+    var getData = function() {
+      return $http.get('sentimentsearch-export.json');
+    };
+
     var apiData = function() {
       var defer = $q.defer();
 
@@ -31,6 +35,7 @@ angular.module('ssApp')
     };
 
     return {
+      getData: getData,
       apiData: apiData
     };
 });

@@ -8,7 +8,7 @@
  * Controller of the ssApp
  */
 angular.module('ssApp')
-.controller('LoginCtrl', function ($scope, $location, authService, ngDialog) {
+.controller('LoginCtrl', function ($scope, $location, authService, $timeout) {
 
   $scope.user = {
     email: '',
@@ -30,11 +30,11 @@ angular.module('ssApp')
     }).catch(function(error) {
       console.error("authentication failed:", error);
       $scope.pb.complete();
-      ngDialog.open({
-        template: '<h3>Login Failed!</h3> \
-                   <p>Please check your credentials and try again</p>',
-        plain: true
-      });
+      $scope.login.authMsg = 'Please check your credentials and try again!';
+
+      $timeout(function () {
+        $scope.login.authMsg = null;
+      }, 2000);
 
     });
   };
