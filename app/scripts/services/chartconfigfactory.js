@@ -20,7 +20,8 @@ angular.module('ssApp')
       valueFormat: function(d){
         return d3.format('03d')(d);
       },
-      transitionDuration: 500
+      transitionDuration: 500,
+      labelSunbeamLayout: true
     },
     barChart : {
       type: 'multiBarHorizontalChart',
@@ -34,12 +35,6 @@ angular.module('ssApp')
         return d3.format(',.2f')(d);
       },
       transitionDuration: 500,
-      // xAxis: {
-      //   axisLabel: 'Categories'
-      // },
-      // yAxis: {
-      //   axisLabel: 'Average Sentiment'
-      // }
     }
   };
 

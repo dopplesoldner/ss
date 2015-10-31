@@ -16,8 +16,14 @@ angular.module('ssApp')
   $scope.apiData = init.apiData.data['jones family project'];
   $scope.currentAuth = init.currentAuth;
 
-  $scope.radioModel = 'Basic';
-  $scope.displayed = [];
+  $scope.btn = {
+    mode: 'Basic'
+  };
+
+  $scope.$watch('btn.mode', function(){
+    console.log($scope.btn.mode);
+  });
+
   $scope.data_pie = [];
   $scope.data_bar = [{values: []}];
   $scope.entity = '';
@@ -27,10 +33,6 @@ angular.module('ssApp')
   for (var key in $scope.apiData.reviewCount) {
     $scope.reviewSources.push({source: key, count: $scope.apiData.reviewCount[key]});
   }
-      
-  $scope.updateMode = function() {
-    console.log('Clicked');
-  };
 
   $scope.updateEntity = function() {
     console.log($scope.radio.model);
@@ -64,7 +66,6 @@ angular.module('ssApp')
         });
       }
     });
-
   };
 
   //table

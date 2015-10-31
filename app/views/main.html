@@ -3,7 +3,17 @@
 <!-- sidebar-->
 
 <div class="container-fluid view-container">
-  <h3>Jones Family Project</h3>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-md-9">
+      <h4>Jones Family Project</h4>
+    </div>  
+    <div class="col-md-2 pull-right">
+      <div class="btn-group">
+         <label ng-model="btn.mode" uib-btn-radio="'Basic'" class="btn btn-pill-left btn-default" ng-click="updateMode()">Basic</label>
+         <label ng-model="btn.mode" uib-btn-radio="'Advanced'" class="btn btn-oval btn-default" ng-click="updateMode()">Advanced</label>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-4">
@@ -59,32 +69,12 @@
       </div>
     </div>
 
-
-    <!--   <div class="row">
-      <div class="col-md-3">
-      <div class="btn-group">
-      <label class="btn btn-success" ng-model="radioModel" ng-click="updateMode()" uib-btn-radio="'Basic'" uncheckable>Basic</label>
-      <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Advanced'" uncheckable>Advanced</label>
-      </div>
-
-      </div>
-      <div id="overview" class="overview col-md-3 pull-right">
-      <h4>Jones Family Project</h4>
-      </div>
-      </div>
-
-      <div class="row categories" ng-show="radioModel == 'Advanced'">
-      <div class="btn-group input-group btn-group-justified">
-      <label ng-repeat="e in entities" class="btn btn-primary" ng-model="radio.model" uib-btn-radio="e" ng-click="updateEntity()">{{e}}</label>
-      </div>
-      </div> -->
-
       <div class="row">
         <div class="col-md-4">
           <!-- START bar chart-->
           <div class="panel">
             <div class="panel-heading">
-              <div class="panel-title">Number of Reviews per Category</div>
+              <div class="panel-title">Review Breakdown</div>
             </div>
             <div class="panel-body">
               <nvd3 options='options_pie' data='data_pie'></nvd3>
@@ -126,43 +116,6 @@
 
         </div>
       </div>
-
-
-
-      <!-- <div class="row" ng-show="showTable">
-        <div class="panel">
-        <div class="panel-heading">{{activeCategory | capitalize}}</div>
-        <div class="panel-body">
-        <div id="table" class="col-md-12">
-        <table st-table="displayed" st-safe-src="rowCollection" class="table table-striped">
-        <thead>
-        <tr>
-        <th st-sort="Date">Date</th>
-        <th st-sort="Text">Text</th>
-        <th st-sort="Sentiment">Sentiment</th>
-        <th st-sort="Url">Source</th>
-        </tr>
-        <tbody>
-        <tr ng-repeat="row in displayed">
-        <td>{{row.Date}}</td>
-        <td>{{row.Text}}</td>
-        <td>{{row.Sentiment}}</td>
-        <td><a ng-href="{{row.Url}}" target="_blank">Url</a></td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-        <td colspan="5" class="text-center">
-        <div st-pagination="" st-items-by-page="5"> </div>
-        </td>
-        </tr>
-        </tfoot>
-        </table>
-        </div>
-        </div>
-        </div>
-
-        </div> -->
 
   </div>
   <!-- end container -->
