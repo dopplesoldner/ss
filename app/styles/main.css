@@ -7,7 +7,7 @@
 
 body {
   padding: 0;
-G}
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -84,5 +84,5 @@ G}
 
 .view-container {
   margin-left: 15px;
-  margin-right: 15px
+  margin-right: 15px;
 }

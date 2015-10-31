@@ -8,7 +8,7 @@
  * Controller of the ssApp
  */
 angular.module('ssApp')
-.controller('MainCtrl', function ($scope, $location, chartConfig, init, authService, capitalizeFilter) {
+.controller('MainCtrl', function ($scope, $location, $timeout, chartConfig, init, authService, capitalizeFilter) {
 
   // $scope.apiData = init.apiData;
 
@@ -17,7 +17,6 @@ angular.module('ssApp')
   $scope.currentAuth = init.currentAuth;
 
   $scope.radioModel = 'Basic';
-  $scope.showTable = false;
   $scope.displayed = [];
   $scope.data_pie = [];
   $scope.data_bar = [{values: []}];
@@ -51,18 +50,21 @@ angular.module('ssApp')
     $scope.apiData.average.forEach(function(f){
       if(f.Count > 0) {
         $scope.data_pie.push({
-          "label": capitalizeFilter(f.Name),
+          // "label": capitalizeFilter(f.Name),
+          "label": f.Name,
           "value": f.Count
         });
       }
 
       if(f.Sentiment > 0) {
         $scope.data_bar[0].values.push({
-          "label": capitalizeFilter(f.Name),
+          // "label": capitalizeFilter(f.Name),
+          "label": f.Name,
           "value": f.Sentiment
         });
       }
     });
+
   };
 
   //table
@@ -82,7 +84,6 @@ angular.module('ssApp')
         });
       }
     }
-    $scope.showTable = true;
     $scope.$apply();
   };
 
@@ -102,4 +103,8 @@ angular.module('ssApp')
 
   updateCharts();
 
+  $timeout(function() {
+    updateTable("general");
+  });
+  
 });
