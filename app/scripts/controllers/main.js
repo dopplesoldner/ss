@@ -8,7 +8,7 @@
  * Controller of the ssApp
  */
 angular.module('ssApp')
-.controller('MainCtrl', function ($scope, $location, chartConfig, init, authService) {
+.controller('MainCtrl', function ($scope, $location, chartConfig, init, authService, capitalizeFilter) {
 
   // $scope.apiData = init.apiData;
 
@@ -24,6 +24,11 @@ angular.module('ssApp')
   $scope.entity = '';
   $scope.radio = {model :  'Bar'};
 
+  $scope.reviewSources = [];
+  for (var key in $scope.apiData.reviewCount) {
+    $scope.reviewSources.push({source: key, count: $scope.apiData.reviewCount[key]});
+  }
+      
   $scope.updateMode = function() {
     console.log('Clicked');
   };
@@ -46,14 +51,14 @@ angular.module('ssApp')
     $scope.apiData.average.forEach(function(f){
       if(f.Count > 0) {
         $scope.data_pie.push({
-          "label": f.Name,
+          "label": capitalizeFilter(f.Name),
           "value": f.Count
         });
       }
 
       if(f.Sentiment > 0) {
         $scope.data_bar[0].values.push({
-          "label": f.Name,
+          "label": capitalizeFilter(f.Name),
           "value": f.Sentiment
         });
       }

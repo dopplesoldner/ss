@@ -24,7 +24,7 @@ angular.module('ssApp')
     },
     barChart : {
       type: 'multiBarHorizontalChart',
-      height: 450,
+      height: 250,
       x: function(d){ return d.label; },
       y: function(d){ return d.value; },
       showValues: true,
@@ -34,12 +34,12 @@ angular.module('ssApp')
         return d3.format(',.2f')(d);
       },
       transitionDuration: 500,
-      xAxis: {
-        axisLabel: 'Categories'
-      },
-      yAxis: {
-        axisLabel: 'Average Sentiment'
-      }
+      // xAxis: {
+      //   axisLabel: 'Categories'
+      // },
+      // yAxis: {
+      //   axisLabel: 'Average Sentiment'
+      // }
     }
   };
 

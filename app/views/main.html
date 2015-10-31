@@ -2,14 +2,75 @@
 <header ng-include="'views/partials/top-navbar.html'" class="topnavbar-wrapper"></header>
 <!-- sidebar-->
 
-<div class="container-fluid">
+<div class="container-fluid view-container">
+  <h3>Jones Family Project</h3>
+
+  <div class="row">
+    <div class="col-md-4">
+      <!-- START List group-->
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row row-table pv-lg">
+            <div class="col-xs-6">
+              <p class="m0 lead">{{apiData.overall}}</p>
+              <p class="m0">
+              <small>Overall Sentiment Score</small>
+              </p>
+            </div>
+            <div class="col-xs-6 text-center">
+              <div sparkline="" data-bar-color="#23b7e5" data-height="60" data-bar-width="10" data-bar-spacing="6" data-chart-range-min="0" values="3,6,7,8,4,5" class="ng-isolate-scope"><canvas width="90" height="60" style="display: inline-block; width: 90px; height: 60px; vertical-align: top;"></canvas></div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row row-table pv-lg">
+               <div class="col-xs-6">
+                  <h5>Review Sources</h5> 
+               </div>
+               <div class="col-xs-6">
+                  <ul class="list-inline text-center">
+                     <li ng-repeat="s in reviewSources">
+                       <p class="m0 lead">{{s.count}}</p>
+                      <p class="m0">
+                         <small>{{s.source}}</small>
+                      </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </li>
+      </ul>
+      <!-- END List group-->
+    </div>
+    <div class="col-md-8">
+      <!-- START bar chart-->
+      <div id="panelChart3" class="panel">
+        <div class="panel-heading">
+          <div class="panel-title">Sentiment Score per category</div>
+        </div>
+        <!-- <div collapse="panelChart3" class="panel-wrapper collapse in graph"> -->
+
+        <div class="panel-body">
+          <nvd3 options='options_bar' data='data_bar'></nvd3>
+        </div>
+        
+      </div>
+      <!-- END bar chart-->
+    </div>
+  </div>
+
+
+
+
+
+
   <div class="row">
     <div class="col-md-3">
       <div class="btn-group">
         <label class="btn btn-success" ng-model="radioModel" ng-click="updateMode()" uib-btn-radio="'Basic'" uncheckable>Basic</label>
         <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Advanced'" uncheckable>Advanced</label>
       </div>
-        
+
     </div>
     <div id="overview" class="overview col-md-3 pull-right">
       <h4>Jones Family Project</h4>
@@ -73,6 +134,7 @@
   </div>
 
 </div>
+<!-- end container -->
 
 <!-- Page footer-->
 <footer ng-include="'views/partials/footer.html'"></footer>
