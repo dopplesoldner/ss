@@ -9,8 +9,8 @@
     </div>  
     <div class="col-md-2 pull-right">
       <div class="btn-group">
-         <label ng-model="btn.mode" uib-btn-radio="'Basic'" class="btn btn-pill-left btn-default" ng-click="updateMode()">Basic</label>
-         <label ng-model="btn.mode" uib-btn-radio="'Advanced'" class="btn btn-oval btn-default" ng-click="updateMode()">Advanced</label>
+         <label ng-model="btn.mode" uib-btn-radio="'Basic'" class="btn btn-pill-left btn-default">Basic</label>
+         <label ng-model="btn.mode" uib-btn-radio="'Advanced'" class="btn btn-oval btn-default">Advanced</label>
       </div>
     </div>
   </div>
@@ -61,7 +61,7 @@
         <!-- <div collapse="panelChart3" class="panel-wrapper collapse in graph"> -->
 
         <div class="panel-body">
-          <nvd3 options='options_bar' data='data_bar'></nvd3>
+          <nvd3 options="options_bar" data="data_bar"></nvd3>
         </div>
 
         </div>
@@ -77,7 +77,7 @@
               <div class="panel-title">Review Breakdown</div>
             </div>
             <div class="panel-body">
-              <nvd3 options='options_pie' data='data_pie'></nvd3>
+              <nvd3 options="options_pie" data="data_pie"></nvd3>
             </div>
           </div>
         </div>
@@ -111,6 +111,12 @@
                     </tr>
                   </tfoot>
               </table>
+              <div class="col-md-6">
+                <nvd3 options="options_pie" data="data_pie_advanced" api="api"></nvd3>
+              </div>
+              <div class="col-md-6">
+                <nvd3 options="options_bar" data="data_bar_advanced"></nvd3>
+              </div>
             </div>
           </div>
 

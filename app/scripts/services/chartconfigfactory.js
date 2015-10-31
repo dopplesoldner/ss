@@ -13,7 +13,7 @@ angular.module('ssApp')
   var charts = {
     pieChart : {
       type: 'pieChart',
-      height: 450,
+      height: 350,
       x: function(d){ return d.label; },
       y: function(d){ return d.value; },
       showValues: true,

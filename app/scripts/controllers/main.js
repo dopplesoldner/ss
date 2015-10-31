@@ -26,8 +26,10 @@ angular.module('ssApp')
 
   $scope.data_pie = [];
   $scope.data_bar = [{values: []}];
+  $scope.data_pie_advanced = [];
+  $scope.data_bar_advanced = [{values: []}];
+
   $scope.entity = '';
-  $scope.radio = {model :  'Bar'};
 
   $scope.reviewSources = [];
   for (var key in $scope.apiData.reviewCount) {
@@ -72,9 +74,10 @@ angular.module('ssApp')
   var updateTable = function(category) {
     $scope.activeCategory = String(category);
     $scope.rowCollection = [];
+    var activeCategory = $scope.apiData.entity[category];
 
-    for (var key in $scope.apiData.entity[category]) {
-      var d = $scope.apiData.entity[category][key];
+    for (var key in activeCategory) {
+      var d = activeCategory[key];
 
       for (var k2 in d) {
         $scope.rowCollection.push({
@@ -86,18 +89,30 @@ angular.module('ssApp')
         });
       }
     }
+
+    $scope.data_pie_advanced = [];
+    for(var key in activeCategory) {
+      $scope.data_pie_advanced.push({
+        "label": key,
+        "value": activeCategory[key].length
+      });
+    }
+
+    $scope.api.refresh();
     $scope.$apply();
   };
 
 
   $scope.options_bar = { chart: chartConfig.barChart };
+  $scope.options_bar_advanced = { chart: chartConfig.barChart };
   $scope.options_pie = { chart: chartConfig.pieChart };
+  $scope.options_pie_advanced = { chart: chartConfig.pieChart };
   // add event handler
 
   $scope.options_pie.chart.pie =  {   
     dispatch: {   
       elementClick: function(t){
-        if($scope.radioModel === 'Basic')
+        if($scope.btn.mode === 'Basic')
           updateTable(t.data.label);
       }
     }
