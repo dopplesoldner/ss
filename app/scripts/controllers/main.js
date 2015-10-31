@@ -80,7 +80,8 @@ angular.module('ssApp')
           Date: d[k2].Date,
           Text: d[k2].Text,
           Sentiment: d[k2].Sentiment,
-          Url: d[k2].Url
+          Url: d[k2].Url,
+          Source: d[k2].Source
         });
       }
     }
