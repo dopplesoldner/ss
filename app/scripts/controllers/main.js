@@ -24,10 +24,10 @@ angular.module('ssApp')
     console.log($scope.btn.mode);
   });
 
-  $scope.data_pie = [];
-  $scope.data_bar = [{values: []}];
-  $scope.data_pie_advanced = [];
-  $scope.data_bar_advanced = [{values: []}];
+  $scope.dataPie = [];
+  $scope.dataBar = [{values: []}];
+  $scope.dataPie_advanced = [];
+  $scope.dataMultiBar = []; 
 
   $scope.reviewSources = [];
   for (var key in $scope.apiData.reviewCount) {
@@ -42,21 +42,58 @@ angular.module('ssApp')
   var updateCharts = function() {
     $scope.apiData.average.forEach(function(f){
       if(f.Count > 0) {
-        $scope.data_pie.push({
-          // "label": capitalizeFilter(f.Name),
+        $scope.dataPie.push({
           "label": f.Name,
           "value": f.Count
         });
       }
 
       if(f.Sentiment > 0) {
-        $scope.data_bar[0].values.push({
-          // "label": capitalizeFilter(f.Name),
+        $scope.dataBar[0].values.push({
           "label": f.Name,
           "value": f.Sentiment
         });
       }
     });
+
+    var positives = {};
+    var negatives = {};
+
+    $scope.apiData.relevance.forEach(function(f){
+      if(f.NamedEntity.split("|").length > 1) return;
+
+      if (!(f.NamedEntity in positives)) {
+        positives[f.NamedEntity] = 0;
+      }
+      if (!(f.NamedEntity in negatives)) {
+        negatives[f.NamedEntity] = 0;
+      }
+
+      if(f.Sentiment < 5.0) {
+        negatives[f.NamedEntity] += 1;
+      } else {
+        positives[f.NamedEntity] += 1;
+      }
+    });  
+
+    var pos = [];
+    var neg = [];
+
+    for(var key in positives) {
+      pos.push({
+        "label": key,
+        "value": positives[key]
+      });
+    }
+    for(var key in negatives) {
+      neg.push({
+        "label": key,
+        "value": negatives[key]
+      });
+    }
+
+    $scope.dataMultiBar.push({key: "positives", values: pos});
+    $scope.dataMultiBar.push({key: "negatives", values: neg});
   };
 
   //table
@@ -79,9 +116,9 @@ angular.module('ssApp')
       }
     }
 
-    $scope.data_pie_advanced = [];
+    $scope.dataPie_advanced = [];
     for(var key in activeCategory) {
-      $scope.data_pie_advanced.push({
+      $scope.dataPie_advanced.push({
         "label": key,
         "value": activeCategory[key].length
       });
@@ -91,6 +128,7 @@ angular.module('ssApp')
   };
 
   $scope.chartOptions = {
+    optionsMultiBar: angular.copy(chartConfig.multiBarChart),
     optionsBar: angular.copy(chartConfig.barChart),
     optionsBarAdvanced: angular.copy(chartConfig.barChart),
     optionsPie: angular.copy(chartConfig.pieChart),

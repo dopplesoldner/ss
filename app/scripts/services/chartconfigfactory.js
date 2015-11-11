@@ -40,6 +40,30 @@ angular.module('ssApp')
         },
         transitionDuration: 500,
       }
+    },
+    multiBarChart: {
+      chart: {
+        type: 'multiBarChart',
+        height: 250,
+        margin : {
+          top: 20,
+          right: 20,
+          bottom: 60,
+          left: 60
+        },
+        yAxis: {
+          axisLabel: 'Number of reviews'
+        },
+        xAxis: {
+          rotateLabels: -45
+        },
+        //staggerLabels: true,
+        reduceXTicks: false,
+        showControls: false,
+        stacked: true,
+        x: function(d){ return d.label; },
+        y: function(d){ return d.value; },
+      }
     }
   };
 

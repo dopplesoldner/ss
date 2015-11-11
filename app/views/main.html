@@ -7,12 +7,12 @@
     <div class="col-md-9">
       <h4>Jones Family Project</h4>
     </div>  
-    <div class="col-md-2 pull-right">
-      <div class="btn-group">
-         <label ng-model="btn.mode" uib-btn-radio="'Basic'" class="btn btn-pill-left btn-default">Basic</label>
-         <label ng-model="btn.mode" uib-btn-radio="'Advanced'" class="btn btn-oval btn-default">Advanced</label>
-      </div>
-    </div>
+    <!--<div class="col-md-2 pull-right">-->
+      <!--<div class="btn-group">-->
+         <!--<label ng-model="btn.mode" uib-btn-radio="'Basic'" class="btn btn-pill-left btn-default">Basic</label>-->
+         <!--<label ng-model="btn.mode" uib-btn-radio="'Advanced'" class="btn btn-oval btn-default">Advanced</label>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 
   <div class="row">
@@ -63,7 +63,12 @@
         <!-- <div collapse="panelChart3" class="panel-wrapper collapse in graph"> -->
 
         <div class="panel-body">
-          <nvd3 options="chartOptions.optionsBar" data="data_bar"></nvd3>
+          <div class="col-md-6">
+            <nvd3 options="chartOptions.optionsBar" data="dataBar"></nvd3>
+          </div>
+          <div class="col-md-6">
+            <nvd3 options="chartOptions.optionsMultiBar" data="dataMultiBar"></nvd3>
+          </div>
         </div>
 
         </div>
@@ -81,7 +86,7 @@
               </div>
             </div>
             <div class="panel-body">
-              <nvd3 options="chartOptions.optionsPie" data="data_pie"></nvd3>
+              <nvd3 options="chartOptions.optionsPie" data="dataPie"></nvd3>
             </div>
           </div>
         </div>
@@ -118,7 +123,7 @@
                   </tfoot>
               </table>
               <div class="col-md-6">
-                <nvd3 options="chartOptions.optionsPieAdvanced" data="data_pie_advanced"></nvd3>
+                <nvd3 options="chartOptions.optionsPieAdvanced" data="dataPie_advanced"></nvd3>
               </div>
               <!-- <div class="col-md-6">
                 <nvd3 options="chartOptions.optionsBarAdvanced" data="data_bar_advanced"></nvd3>
