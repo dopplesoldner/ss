@@ -59,6 +59,7 @@ angular.module('ssApp')
     var positives = {};
     var negatives = {};
 
+    //calculation of positive and negative per named entity
     $scope.apiData.relevance.forEach(function(f){
       if(f.NamedEntity.split("|").length > 1) return;
 
