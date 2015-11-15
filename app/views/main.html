@@ -54,24 +54,22 @@
     </div>
     <div class="col-md-8">
       <!-- START bar chart-->
-      <div id="panelChart3" class="panel">
+      <div class="panel">
         <div class="panel-heading">
           <div class="panel-title">
-            <div class="col-md-12"><em class="icon-bar-chart"></em>  Sentiment Score per category</div>
+            <div class="col-md-12"><em class="icon-pie-chart"></em>  Review Breakdown</div>
           </div>
         </div>
-        <!-- <div collapse="panelChart3" class="panel-wrapper collapse in graph"> -->
-
         <div class="panel-body">
           <div class="col-md-6">
-            <nvd3 options="chartOptions.optionsBar" data="dataBar"></nvd3>
+            <nvd3 options="chartOptions.optionsPie" data="dataPie"></nvd3>  
           </div>
           <div class="col-md-6">
-            <nvd3 options="chartOptions.optionsMultiBar" data="dataMultiBar"></nvd3>
+            <nvd3 options="chartOptions.optionsPieAdvanced" data="dataPie_advanced"></nvd3>  
           </div>
         </div>
+      </div>
 
-        </div>
         <!-- END bar chart-->
       </div>
     </div>
@@ -79,17 +77,26 @@
       <div class="row">
         <div class="col-md-4">
           <!-- START bar chart-->
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="panel-title">
-                <div class="col-md-12"><em class="icon-pie-chart"></em>  Review Breakdown</div>
-              </div>
-            </div>
-            <div class="panel-body">
-              <nvd3 options="chartOptions.optionsPie" data="dataPie"></nvd3>
-              <nvd3 options="chartOptions.optionsPieAdvanced" data="dataPie_advanced"></nvd3>
+
+        <div id="panelChart3" class="panel">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <div class="col-md-12"><em class="icon-bar-chart"></em>  Sentiment Score per category</div>
             </div>
           </div>
+          <!-- <div collapse="panelChart3" class="panel-wrapper collapse in graph"> -->
+
+          <div class="panel-body">
+            <div class="col-md-12">
+              <nvd3 options="chartOptions.optionsBar" data="dataBar"></nvd3>
+            </div>
+            <div class="col-md-12">
+              <nvd3 options="chartOptions.optionsMultiBar" data="dataMultiBar"></nvd3>
+            </div>
+          </div>
+
+        </div>
+          
         </div>
         <div class="col-md-8">
           <div class="panel">
