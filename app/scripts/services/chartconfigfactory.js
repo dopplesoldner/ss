@@ -21,6 +21,7 @@ angular.module('ssApp')
         valueFormat: function(d){
           return d3.format('03d')(d);
         },
+        showLegend: false,
         transitionDuration: 500,
         labelSunbeamLayout: true,
         deepWatchData: true
