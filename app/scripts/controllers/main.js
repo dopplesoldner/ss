@@ -100,6 +100,7 @@ angular.module('ssApp')
   //table
   var updateTable = function(category) {
     $scope.activeCategory = String(category);
+    $scope.activeSubCategory = '';
     $scope.rowCollection = [];
     var activeCategory = $scope.apiData.entity[category];
 
@@ -128,6 +129,25 @@ angular.module('ssApp')
     $scope.$apply();
   };
 
+  var updateTableAdvanced = function(subCategory) {
+    $scope.activeSubCategory = '-' + subCategory;
+    var activeSubCategory = $scope.apiData.entity[$scope.activeCategory][subCategory];
+    $scope.rowCollection = [];
+
+    activeSubCategory.forEach(function(item){
+      $scope.rowCollection.push({
+        Date: item.Date,
+        Text: item.Text,
+        Sentiment: item.Sentiment,
+        Url: item.Url,
+        Source: item.Source
+      });
+
+    });
+
+    $scope.$apply();
+  }
+
   $scope.chartOptions = {
     optionsMultiBar: angular.copy(chartConfig.multiBarChart),
     optionsBar: angular.copy(chartConfig.barChart),
@@ -140,12 +160,19 @@ angular.module('ssApp')
   $scope.chartOptions.optionsPie.chart.pie =  {   
     dispatch: {   
       elementClick: function(t){
-        if($scope.btn.mode === 'Basic')
-          updateTable(t.data.label);
+        updateTable(t.data.label);
       }
     }
   };
 
+  // add event handler
+  $scope.chartOptions.optionsPieAdvanced.chart.pie =  {   
+    dispatch: {   
+      elementClick: function(t){
+        updateTableAdvanced(t.data.label);
+      }
+    }
+  };
   updateCharts();
 
   $timeout(function() {

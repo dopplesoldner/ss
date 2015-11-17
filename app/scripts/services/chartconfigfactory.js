@@ -14,12 +14,18 @@ angular.module('ssApp')
     pieChart : {
       chart: {
         type: 'pieChart',
-        height: 350,
+        height: 300,
         x: function(d){ return d.label; },
         y: function(d){ return d.value; },
         showValues: true,
         valueFormat: function(d){
           return d3.format('03d')(d);
+        },
+        margin : {
+          top: -20,
+          right: 20,
+          bottom: -20,
+          left: 20
         },
         showLegend: false,
         transitionDuration: 500,
