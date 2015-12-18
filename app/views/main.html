@@ -59,16 +59,49 @@
 
             <div class="col-sm-3">
                 <small>Last Updated: 30/11/2015</small>
-                <ul class="list-unstyled list-group clear-list m-t">
+                <ul class="list-group clear-list m-t">
                     <h4>
                         Review Sources
                     </h4>
-                    <li ng-repeat="s in reviewSources">
+                    <!-- <li ng-repeat="s in reviewSources">
                         <span class="pull-right">
                             {{s.count}}
                         </span>
                         <span class="label label-success">1</span> {{s.source}}
-                    </li>                   
+                    </li>                    -->
+
+
+                    <li class="list-group-item fist-item"> 
+                        <span class="pull-right"> 
+                            <div class="i-checks"><label>{{apiData.reviewCount['Trip Advisor']}}</label> </div> 
+                        </span> 
+                        <span class="label label-success">1</span> Trip Advisor 
+                    </li> 
+                    <li class="list-group-item"> 
+                        <span class="pull-right"> 
+                            <div class="i-checks"><label>{{apiData.reviewCount['Open Table']}}</label> </div> 
+                        </span> 
+                        <span class="label label-info">2</span> Open Table 
+                    </li> 
+                    <li class="list-group-item"> 
+                        <span class="pull-right"> 
+                            <div class="i-checks"><label>{{apiData.reviewCount['Yelp']}}</label> </div> 
+                        </span> 
+                        <span class="label label-primary">3</span> Yelp 
+                    </li> 
+                    <li class="list-group-item"> 
+                        <span class="pull-right"> 
+                            <div class="i-checks"><label>{{apiData.reviewCount['TimeOut']}}</label></div> 
+                        </span> 
+                        <span class="label label-default">4</span> TimeOut 
+                    </li> 
+                    <li class="list-group-item"> 
+                        <span class="pull-right"> 
+                            <div class="i-checks"><label>{{apiData.reviewCount['Design My Night']}}</label> </div> 
+                        </span> 
+                        <span class="label label-primary">5</span> Design My Night 
+                    </li> 
+
                 </ul>
             </div>
             <div class="col-sm-6">
@@ -107,133 +140,72 @@
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>Most Mentioned</h5>
-                                <span class="label label-warning-light pull-right">{{numComments}} Comments</span>
+                                <span class="label label-warning-light pull-right">{{apiData.relevanceLatest.length}} Comments</span>
                             </div>
                             <div class="ibox-content">
 
                                 <div>
-                                    <div class="feed-activity-list">
-
+                                    <div ng-repeat="mention in apiData.relevanceLatest" class="feed-activity-list">
                                         <div class="feed-element">
                                             <a href="profile.html" class="pull-left">
                                                 <img alt="image" class="img-circle" src="images/comment.png">
                                             </a>
                                             <div class="media-body ">
-                                                <small class="pull-right">58 Mentions</small>
-                                                <strong>Food: </strong> the food was excellent. <br>
-                                                <small class="text-muted">Sentiment: 8</small>
+                                                <small class="pull-right">{{mention.Frequency}} Mentions</small>
+                                                <strong>{{mention.NamedEntity}}: </strong> {{mention.Text}} <br>
+                                                <small class="text-muted">Sentiment: {{mention.Sentiment}}</small>
                                             </div>
-                                        </div>
-
-                                        <div class="feed-element">
-                                            <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="images/comment.png">
-                                            </a>
-                                            <div class="media-body ">
-                                                <small class="pull-right">58 Mentions</small>
-                                                <strong>Food: </strong> the food was excellent. <br>
-                                                <small class="text-muted">Sentiment: 8</small>
-                                            </div>
-                                        </div>
-                                        <div class="feed-element">
-                                            <a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="images/comment.png">
-                                            </a>
-                                            <div class="media-body ">
-                                               <small class="pull-right">58 Mentions</small>
-                                               <strong>Food: </strong> the food was excellent. <br>
-                                               <small class="text-muted">Sentiment: 8</small>
-                                           </div>
-                                       </div>
-                                       <div class="feed-element">
-                                        <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="images/comment.png">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">58 Mentions</small>
-                                            <strong>Food: </strong> the food was excellent. <br>
-                                            <small class="text-muted">Sentiment: 8</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="images/comment.png">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">58 Mentions</small>
-                                            <strong>Food: </strong> the food was excellent. <br>
-                                            <small class="text-muted">Sentiment: 8</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="images/comment.png">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">58 Mentions</small>
-                                            <strong>Food: </strong> the food was excellent. <br>
-                                            <small class="text-muted">Sentiment: 8</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="images/comment.png">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">58 Mentions</small>
-                                            <strong>Food: </strong> the food was excellent. <br>
-                                            <small class="text-muted">Sentiment: 8</small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Monthly Feed</h5>
-                            <div class="ibox-tools">
-                                <span class="label label-warning-light pull-right">{{numComments}} Comments</span>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
 
-                            <table st-table="displayed" st-safe-src="rowCollection" class="table table-striped">
-                                <thead>
-                                  <tr>
-                                    <th class="col-md-2" st-sort="Date">Date <i class="fa fa-fw fa-sort"></i></th>
-                                    <th class="col-md-6">Text</th>
-                                    <th class="col-md-2" st-sort="Sentiment">Sentiment <i class="fa fa-fw fa-sort"></i></th>
-                                    <th class="col-md-2">Source</th>
+                    <div class="col-lg-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Monthly Feed</h5>
+                                <div class="ibox-tools">
+                                    <span class="label label-warning-light pull-right">{{latestTable.length}} Comments</span>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+
+                                <table st-table="displayed" st-safe-src="latestTable" class="table">
+                                    <thead>
+                                      <tr>
+                                        <th class="col-md-2" st-sort="Date">Date <i class="fa fa-fw fa-sort"></i></th>
+                                        <th class="col-md-6">Text</th>
+                                        <th class="col-md-2" st-sort="Sentiment">Sentiment <i class="fa fa-fw fa-sort"></i></th>
+                                        <th class="col-md-2">Source</th>
+                                    </tr>
+                                    <tbody>
+                                        <tr ng-repeat="row in displayed">
+                                          <td>{{row.Date}}</td>
+                                          <td>{{row.Text}}</td>
+                                          <td>{{row.Sentiment}}</td>
+                                          <td><a ng-href="{{row.Url}}" target="_blank">{{row.Source}}</a></td>
+                                      </tr>
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="8"> </div>
+                                    </td>
                                 </tr>
-                                <tbody>
-                                    <tr ng-repeat="row in displayed">
-                                      <td>{{row.Date}}</td>
-                                      <td>{{row.Text}}</td>
-                                      <td>{{row.Sentiment}}</td>
-                                      <td><a ng-href="{{row.Url}}" target="_blank">{{row.Source}}</a></td>
-                                  </tr>
-                              </tbody>
-                              <tfoot>
-                                <tr>
-                                  <td colspan="5" class="text-center">
-                                    <div st-pagination="" st-items-by-page="10"> </div>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="footer">
-    <div>
-        <strong>Copyright</strong> Sentiment Search &copy; 2014-2015
+    <div class="footer">
+        <div>
+            <strong>Copyright</strong> Sentiment Search &copy; 2014-2015
+        </div>
     </div>
-</div>
 </div>
 </div>
 </div>
