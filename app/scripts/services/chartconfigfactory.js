@@ -14,7 +14,7 @@ angular.module('ssApp')
     pieChart : {
       chart: {
         type: 'pieChart',
-        height: 300,
+        height: 250,
         x: function(d){ return d.label; },
         y: function(d){ return d.value; },
         showValues: false,
@@ -22,13 +22,15 @@ angular.module('ssApp')
           return d3.format('03d')(d);
         },
         margin : {
-          top: -20,
+          top: 10,
           right: 20,
           bottom: -20,
           left: 20
         },
         showLegend: false,
         donut: true,
+        donutRatio: 0.35,
+        showLabels: false,
         transitionDuration: 500,
         labelSunbeamLayout: true,
         deepWatchData: true
