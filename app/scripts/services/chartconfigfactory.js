@@ -17,7 +17,7 @@ angular.module('ssApp')
         height: 300,
         x: function(d){ return d.label; },
         y: function(d){ return d.value; },
-        showValues: true,
+        showValues: false,
         valueFormat: function(d){
           return d3.format('03d')(d);
         },
@@ -28,6 +28,7 @@ angular.module('ssApp')
           left: 20
         },
         showLegend: false,
+        donut: true,
         transitionDuration: 500,
         labelSunbeamLayout: true,
         deepWatchData: true

@@ -59,48 +59,26 @@
 
             <div class="col-sm-3">
                 <small>Last Updated: 30/11/2015</small>
-                <ul class="list-group clear-list m-t">
+                <ul class="list-unstyled list-group clear-list m-t">
                     <h4>
                         Review Sources
                     </h4>
-                    <li class="list-group-item fist-item">
+                    <li ng-repeat="s in reviewSources">
                         <span class="pull-right">
-                            0
+                            {{s.count}}
                         </span>
-                        <span class="label label-success">1</span> Trip Advisor
-                    </li>
-                    <li class="list-group-item">
-                        <span class="pull-right">
-                            0
-                        </span>
-                        <span class="label label-info">2</span> Open Table
-                    </li>
-                    <li class="list-group-item">
-                        <span class="pull-right">
-                            0
-                        </span>
-                        <span class="label label-primary">3</span> Yelp
-                    </li>
-                    <li class="list-group-item">
-                        <span class="pull-right">
-                            0
-                        </span>
-                        <span class="label label-default">4</span> TimeOut
-                    </li>
-                    <li class="list-group-item">
-                        <span class="pull-right">
-                            0
-                        </span>
-                        <span class="label label-primary">5</span> Design My Night
-                    </li>
+                        <span class="label label-success">1</span> {{s.source}}
+                    </li>                   
                 </ul>
             </div>
             <div class="col-sm-6">
                 <div class="flot-chart dashboard-chart">
-                   <h4>
+                 <h4>
                     Average Sentiment
                 </h4>
-                <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+                <div class="col-md-12">
+                    <nvd3 options="chartOptions.optionsBar" data="dataBar"></nvd3>
+                </div>
             </div>
         </div>
         <div class="col-sm-3">
@@ -110,7 +88,7 @@
                 </h4>
                 <div class="row text-center">
                     <div class="col-lg-10">
-                        <canvas id="doughnutChart" width="150" height="150"></canvas>
+                        <nvd3 options="chartOptions.optionsPie" data="dataPie"></nvd3>
                     </div>
                 </div>
                 <div class="m-t">
@@ -129,7 +107,7 @@
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>Most Mentioned</h5>
-                                <span class="label label-warning-light pull-right">10 Comments</span>
+                                <span class="label label-warning-light pull-right">{{numComments}} Comments</span>
                             </div>
                             <div class="ibox-content">
 
@@ -138,7 +116,7 @@
 
                                         <div class="feed-element">
                                             <a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="images/comment.png">
+                                                <img alt="image" class="img-circle" src="images/comment.png">
                                             </a>
                                             <div class="media-body ">
                                                 <small class="pull-right">58 Mentions</small>
@@ -162,12 +140,12 @@
                                                 <img alt="image" class="img-circle" src="images/comment.png">
                                             </a>
                                             <div class="media-body ">
-                                             <small class="pull-right">58 Mentions</small>
-                                             <strong>Food: </strong> the food was excellent. <br>
-                                             <small class="text-muted">Sentiment: 8</small>
-                                         </div>
-                                     </div>
-                                     <div class="feed-element">
+                                               <small class="pull-right">58 Mentions</small>
+                                               <strong>Food: </strong> the food was excellent. <br>
+                                               <small class="text-muted">Sentiment: 8</small>
+                                           </div>
+                                       </div>
+                                       <div class="feed-element">
                                         <a href="profile.html" class="pull-left">
                                             <img alt="image" class="img-circle" src="images/comment.png">
                                         </a>
@@ -217,106 +195,46 @@
                         <div class="ibox-title">
                             <h5>Monthly Feed</h5>
                             <div class="ibox-tools">
-                                <span class="label label-warning-light pull-right">10 Comments</span>
+                                <span class="label label-warning-light pull-right">{{numComments}} Comments</span>
                             </div>
                         </div>
                         <div class="ibox-content">
 
-                            <table class="table table-hover">
+                            <table st-table="displayed" st-safe-src="rowCollection" class="table table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Text</th>
-                                        <th>Sentiment</th>
-                                        <th>Source (Url)</th>
-                                    </tr>
-                                </thead>
+                                  <tr>
+                                    <th class="col-md-2" st-sort="Date">Date <i class="fa fa-fw fa-sort"></i></th>
+                                    <th class="col-md-6">Text</th>
+                                    <th class="col-md-2" st-sort="Sentiment">Sentiment <i class="fa fa-fw fa-sort"></i></th>
+                                    <th class="col-md-2">Source</th>
+                                </tr>
                                 <tbody>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                    <tr>
-                                        <td>30/11/2015</td>
-                                        <td>Sample Text</span></td>
-                                        <td>0</td>
-                                        <td>Trip Advisor</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                    <tr ng-repeat="row in displayed">
+                                      <td>{{row.Date}}</td>
+                                      <td>{{row.Text}}</td>
+                                      <td>{{row.Sentiment}}</td>
+                                      <td><a ng-href="{{row.Url}}" target="_blank">{{row.Source}}</a></td>
+                                  </tr>
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                  <td colspan="5" class="text-center">
+                                    <div st-pagination="" st-items-by-page="10"> </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <div>
-                <strong>Copyright</strong> Sentiment Search &copy; 2014-2015
-            </div>
-        </div>
     </div>
+</div>
+<div class="footer">
+    <div>
+        <strong>Copyright</strong> Sentiment Search &copy; 2014-2015
+    </div>
+</div>
+</div>
 </div>
 </div>
 </div>

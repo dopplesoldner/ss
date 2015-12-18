@@ -8,7 +8,7 @@
  * Controller of the ssApp
  */
 angular.module('ssApp')
-.controller('MainCtrl', function ($scope, $location, $timeout, chartConfig, init, authService, capitalizeFilter) {
+.controller('MainCtrl', function ($scope, $location, $timeout, chartConfig, init, authService) {
 
   $scope.apiData = init.apiData;
 
@@ -16,85 +16,53 @@ angular.module('ssApp')
   // $scope.apiData = init.apiData.data['jones family project'];
   $scope.currentAuth = init.currentAuth;
 
-  $scope.btn = {
-    mode: 'Basic'
-  };
-
-  $scope.$watch('btn.mode', function(){
-    console.log($scope.btn.mode);
-  });
-
-  $scope.dataPie = [];
-  $scope.dataBar = [{values: []}];
-  $scope.dataPie_advanced = [];
-  $scope.dataMultiBar = []; 
-
-  $scope.reviewSources = [];
-  for (var key in $scope.apiData.reviewCount) {
-    $scope.reviewSources.push({source: key, count: $scope.apiData.reviewCount[key]});
-  }
-
   $scope.logout = function() {
     authService.firebaseAuth.$unauth();
     $location.path('/login');
   };
 
+  $scope.dataPie = [];
+  $scope.dataBar = [{values: []}];
+  $scope.reviewSources = [];
+
+  for (var key in $scope.apiData.reviewCount) {
+    $scope.reviewSources.push({source: key, count: $scope.apiData.reviewCount[key]});
+  }
+
   var updateCharts = function() {
     $scope.apiData.average.forEach(function(f){
-      if(f.Count > 0) {
-        $scope.dataPie.push({
-          "label": f.Name,
-          "value": f.Count
-        });
-      }
-
+      
       if(f.Sentiment > 0) {
         $scope.dataBar[0].values.push({
           "label": f.Name,
           "value": f.Sentiment
         });
       }
+
     });
 
-    var positives = {};
-    var negatives = {};
+    var distribution = {
+      vp: 0, p: 0, n: 0, vn: 0
+    };
 
-    //calculation of positive and negative per named entity
     $scope.apiData.relevance.forEach(function(f){
-      if(f.NamedEntity.split("|").length > 1) return;
-
-      if (!(f.NamedEntity in positives)) {
-        positives[f.NamedEntity] = 0;
-      }
-      if (!(f.NamedEntity in negatives)) {
-        negatives[f.NamedEntity] = 0;
-      }
-
-      if(f.Sentiment < 5.0) {
-        negatives[f.NamedEntity] += 1;
+      if(f.Sentiment > 7) {
+        distribution.vp += 1; 
+      } else if(f.Sentiment < 7 && f.Sentiment >= 5) {
+        distribution.p += 1;
+      } else if(f.Sentiment < 5 && f.Sentiment >= 3) {
+        distribution.n += 1;
       } else {
-        positives[f.NamedEntity] += 1;
+         distribution.vn += 1; 
       }
-    });  
+    });
 
-    var pos = [];
-    var neg = [];
-
-    for(var key in positives) {
-      pos.push({
+    for (key in distribution) {
+      $scope.dataPie.push({
         "label": key,
-        "value": positives[key]
+        "value": distribution[key]
       });
     }
-    for(var key in negatives) {
-      neg.push({
-        "label": key,
-        "value": negatives[key]
-      });
-    }
-
-    $scope.dataMultiBar.push({key: "positives", values: pos});
-    $scope.dataMultiBar.push({key: "negatives", values: neg});
   };
 
   //table
@@ -117,62 +85,14 @@ angular.module('ssApp')
         });
       }
     }
-
-    $scope.dataPie_advanced = [];
-    for(var key in activeCategory) {
-      $scope.dataPie_advanced.push({
-        "label": key,
-        "value": activeCategory[key].length
-      });
-    }
-
-    $scope.$apply();
   };
-
-  var updateTableAdvanced = function(subCategory) {
-    $scope.activeSubCategory = '-' + subCategory;
-    var activeSubCategory = $scope.apiData.entity[$scope.activeCategory][subCategory];
-    $scope.rowCollection = [];
-
-    activeSubCategory.forEach(function(item){
-      $scope.rowCollection.push({
-        Date: item.Date,
-        Text: item.Text,
-        Sentiment: item.Sentiment,
-        Url: item.Url,
-        Source: item.Source
-      });
-
-    });
-
-    $scope.$apply();
-  }
 
   $scope.chartOptions = {
-    optionsMultiBar: angular.copy(chartConfig.multiBarChart),
-    optionsBar: angular.copy(chartConfig.barChart),
-    optionsBarAdvanced: angular.copy(chartConfig.barChart),
-    optionsPie: angular.copy(chartConfig.pieChart),
-    optionsPieAdvanced: angular.copy(chartConfig.pieChart)
+    optionsBar: angular.copy(chartConfig.multiBarChart),
+    optionsPie: angular.copy(chartConfig.pieChart)
   };
 
-  // add event handler
-  $scope.chartOptions.optionsPie.chart.pie =  {   
-    dispatch: {   
-      elementClick: function(t){
-        updateTable(t.data.label);
-      }
-    }
-  };
-
-  // add event handler
-  $scope.chartOptions.optionsPieAdvanced.chart.pie =  {   
-    dispatch: {   
-      elementClick: function(t){
-        updateTableAdvanced(t.data.label);
-      }
-    }
-  };
+  // update charts at script load
   updateCharts();
 
   $timeout(function() {
