@@ -97,10 +97,9 @@
         showXAxis: false,
         tooltipContent: function(key) {
 
-          return `<h3><span style=&quot;font-size: 15.6px; line-height: 24.96px;&quot;>${key.series[0].key}</span></h3>
-
-          <div style=&quot;background:#eee;border:1px solid #ccc;padding:5px 10px;&quot;><small><span style=&quot;font-size: 15.6px; line-height: 24.96px;&quot;>Average Sentiment: ${key.series[0].value}</span><br />
-          <span style=&quot;font-size: 15.6px; line-height: 24.96px;&quot;>Numer of Reviews: ${key.point.size} </span></small></div>`;
+          return '<h3><span style=&quot;font-size: 15.6px; line-height: 24.96px;&quot;>' + key.series[0].key + '</span></h3>' +
+          '<div style=&quot;background:#eee;border:1px solid #ccc;padding:5px 10px;&quot;><small><span style=&quot;font-size: 15.6px; line-height: 24.96px;&quot;>Average Sentiment: ' + key.series[0].value + '</span><br />' +
+          '<span style=&quot;font-size: 15.6px; line-height: 24.96px;&quot;>Numer of Reviews: ' + key.point.size + '</span></small></div>';
         },
         duration: 350,
         

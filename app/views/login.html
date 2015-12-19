@@ -1,31 +1,22 @@
-<div class="block-center mt-xl wd-xl">
-   <!-- START panel-->
-   <div class="panel panel-dark panel-flat">
-      <div class="panel-heading text-center">
-         <h3>SentimentSearch</h3>
-      </div>
-      <div class="panel-body">
-         <p class="text-center pv">SIGN IN TO CONTINUE.</p>
-         <form role="form" ng-submit="submitForm(loginForm.$valid)" name="loginForm" novalidate="" class="form-validate mb-lg">
-            <div class="form-group has-feedback">
-               <input id="exampleInputEmail1" type="email" name="account_email" placeholder="Email address" autocomplete="on" ng-model="user.email" required="" class="form-control" />
-               <span class="fa fa-envelope form-control-feedback text-muted"></span>
-               <span ng-show="loginForm.account_email.$dirty &amp;&amp; loginForm.account_email.$error.required" class="text-danger">This field is required</span>
-               <span ng-show="loginForm.account_email.$dirty &amp;&amp; loginForm.account_email.$error.email" class="text-danger">This field must be a valid email address</span>
-            </div>
-            <div class="form-group has-feedback">
-               <input id="exampleInputPassword1" type="password" name="account_password" placeholder="Password" ng-model="user.password" required="" class="form-control" />
-               <span class="fa fa-lock form-control-feedback text-muted"></span>
-               <span ng-show="loginForm.account_password.$dirty &amp;&amp; loginForm.account_password.$error.required" class="text-danger">This field is required</span>
-            </div>
-      
-            <button type="submit" class="btn btn-block btn-primary mt-lg">Login</button>
-         </form>
-         <div ng-show="login.authMsg" class="alert alert-danger text-center">{{login.authMsg}}</div>
-      </div>
+<div class="middle-box text-center loginscreen animated fadeInDown">
+ <div>
+   <div>
+   <h1 class="logo-name"><img src="images/logo.png" width="220" height="65"/></h1>
    </div>
-   <!-- END panel-->
-   <div class="p-lg text-center">
-      <span>SentimentSearch &copy; 2015</span>
+
+   <form class="m-t form-validate " role="form" ng-submit="submitForm(loginForm.$valid)" name="loginForm" novalidate="">
+    <div class="form-group has-feedback">
+      <input id="exampleInputEmail1" type="email" name="account_email" placeholder="Email address" autocomplete="on" ng-model="user.email" required="" class="form-control" />
+      <span ng-show="loginForm.account_email.$dirty &amp;&amp; loginForm.account_email.$error.required" class="text-danger">This field is required</span>
+      <span ng-show="loginForm.account_email.$dirty &amp;&amp; loginForm.account_email.$error.email" class="text-danger">This field must be a valid email address</span>
    </div>
+   <div class="form-group has-feedback">
+      <input id="exampleInputPassword1" type="password" name="account_password" placeholder="Password" ng-model="user.password" required="" class="form-control" />
+      <span ng-show="loginForm.account_password.$dirty &amp;&amp; loginForm.account_password.$error.required" class="text-danger">This field is required</span>
+   </div>
+
+   <button type="submit" class="btn btn-block btn-primary mt-lg">Login</button>
+</form>
+<div ng-show="login.authMsg" class="alert alert-danger text-center">{{login.authMsg}}</div>
+</div>
 </div>
