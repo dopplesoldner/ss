@@ -14,7 +14,7 @@
     pieChart : {
       chart: {
         type: 'pieChart',
-        height: 250,
+        height: 180,
         x: function(d){ return d.label; },
         y: function(d){ return d.value; },
         showValues: false,
@@ -24,7 +24,7 @@
         margin : {
           top: 10,
           right: 20,
-          bottom: -20,
+          bottom: 10,
           left: 20
         },
         showLegend: false,
@@ -82,6 +82,12 @@
         color: d3.scale.category10().range(),
         scatter: {
           onlyCircles: true
+        },
+        margin : {
+          top: 50,
+          right: 50,
+          bottom: 50,
+          left: 80
         },
         pointRange: ([100, 5000]),
         showControls: false,
