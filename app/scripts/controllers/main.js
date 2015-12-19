@@ -13,12 +13,12 @@ angular.module('ssApp')
   $scope.apiData = init.apiData;
   $scope.currentAuth = init.currentAuth;
   $scope.dataPie = [];
-  $scope.dataBar = [{values: []}];
+  $scope.dataScatter = [];
   $scope.reviewSources = [];
   $scope.latestTable = [];
 
   $scope.chartOptions = {
-    optionsBar: angular.copy(chartConfig.multiBarChart),
+    optionsScatter: angular.copy(chartConfig.scatter),
     optionsPie: angular.copy(chartConfig.pieChart)
   };
 
@@ -40,12 +40,18 @@ angular.module('ssApp')
     });
   }
 
-  //update bar chart
-  $scope.apiData.average.forEach(function(f){
-    if(f.Sentiment > 0) {
-      $scope.dataBar[0].values.push({
-        "label": f.Name,
-        "value": f.Sentiment
+  //update scatter chart
+
+  $scope.apiData.average.forEach(function(data, index){
+    if(data.Sentiment > 0) {
+      $scope.dataScatter.push({
+        key: data.Name,
+        values: [{
+          x: index,
+          y: data.Sentiment,
+          size: data.Count,
+          shape: 'circle'  
+        }]
       });
     }
   });
